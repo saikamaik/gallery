@@ -1,29 +1,32 @@
 package com.example.gallery.presentation.signIn
 
 import android.widget.EditText
-import com.example.gallery.R
 import com.example.gallery.db.AppDao
 import com.google.android.material.textfield.TextInputLayout
 import moxy.MvpPresenter
 import javax.inject.Inject
 
 class SignInPresenter @Inject constructor(
-    var appDao: AppDao
+    private var appDao: AppDao
 )
     : MvpPresenter<SignInView>() {
 
-    fun signInUser(email: String, password: String) {
-        if (appDao.isUserExist(email)) {
-            val user = appDao.getOneUser(email)
-            if (user.password == password) {
+    fun signInUser(email: EditText, password: EditText) {
+
+        setError(email, null)
+        setError(password, null)
+
+        if (appDao.isUserExist(email.text.toString())) {
+            val user = appDao.getOneUser(email.text.toString())
+            if (user.password == password.text.toString()) {
                 viewState.navigateToHomeFragment()
                 appDao.updateCurrentUserField(true, user.email)
             } else {
-                viewState.showToast(R.string.passwords_doesnt_match)
+                setError(password, "Пароль не верный")
             }
         }
         else {
-            viewState.showToast(R.string.user_doesnt_exist)
+            setError(email, "Пользователя с такой почтой не существует")
         }
     }
 
@@ -33,5 +36,12 @@ class SignInPresenter @Inject constructor(
             appDao.updateCurrentUserField(false, user.email)
         }
     }
+
+    private fun setError(data: EditText, error: String?) {
+        if (data.parent.parent is TextInputLayout) {
+            (data.parent.parent as TextInputLayout).error = error
+        }
+    }
+
 
 }

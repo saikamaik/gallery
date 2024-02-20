@@ -45,16 +45,15 @@ class SignInFragment: MvpAppCompatFragment(), SignInView {
 
         binding.buttonSignIn.setOnClickListener {
             presenter.signInUser(
-                binding.etEmail.text.toString(),
-                binding.etPassword.text.toString()
+                binding.etEmail,
+                binding.etPassword
             )
         }
     }
 
     override fun navigateToHomeFragment() {
         presenter.resetCurrentUser()
-//        findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-        findNavController().navigate(R.id.homeFragment)
+        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
     }
 
     override fun showToast(id: Int) {

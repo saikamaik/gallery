@@ -75,7 +75,6 @@ class SignUpFragment : MvpAppCompatFragment(), SignUpView {
 
     override fun navigateToHomeFragment() {
         presenter.resetCurrentUser()
-//        findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
-        findNavController().navigate(R.id.homeFragment)
+        findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToHomeFragment())
     }
 }

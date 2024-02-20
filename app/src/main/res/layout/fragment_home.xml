@@ -105,6 +105,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="5dp"
         app:tabTextColor="@color/black"
+        android:background="@color/white"
         app:tabMode="fixed"
         android:contentDescription="@string/new_and_popular"
         app:layout_constraintEnd_toEndOf="parent"

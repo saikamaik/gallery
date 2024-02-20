@@ -59,7 +59,7 @@
         android:layout_marginEnd="16dp"
         app:hintEnabled="false"
         app:errorEnabled="true"
-        app:errorIconDrawable="@null"
+        app:errorIconDrawable="@drawable/triangle_danger"
         app:boxStrokeErrorColor="#E80000"
         app:boxStrokeColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_in">
@@ -122,7 +122,7 @@
         android:layout_marginEnd="16dp"
         app:hintEnabled="false"
         app:errorEnabled="true"
-        app:errorIconDrawable="@null"
+        app:errorIconDrawable="@drawable/triangle_danger"
         app:boxStrokeErrorColor="#E80000"
         app:boxStrokeColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/tl_birthday">
@@ -156,7 +156,7 @@
         app:passwordToggleDrawable="@drawable/eye"
         app:hintEnabled="false"
         app:errorEnabled="true"
-        app:errorIconDrawable="@null"
+        app:errorIconDrawable="@drawable/triangle_danger"
         app:boxStrokeErrorColor="#E80000"
         app:boxStrokeColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/tl_email">
@@ -183,7 +183,7 @@
         app:passwordToggleDrawable="@drawable/eye"
         app:hintEnabled="false"
         app:errorEnabled="true"
-        app:errorIconDrawable="@null"
+        app:errorIconDrawable="@drawable/triangle_danger"
         app:boxStrokeErrorColor="#E80000"
         app:passwordToggleEnabled="true"
         android:layout_marginStart="16dp"

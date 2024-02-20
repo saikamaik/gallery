@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.example.gallery.App
 import com.example.gallery.databinding.FragmentHomeBinding
 import com.example.gallery.presentation.TabsPagerAdapter
-import com.example.gallery.recyclerview.RecyclerViewAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import moxy.MvpAppCompatFragment
-import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
 class HomeFragment: MvpAppCompatFragment(), HomeView {
@@ -33,6 +30,7 @@ class HomeFragment: MvpAppCompatFragment(), HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         initTabsPager()
         binding.homePlaceholder.isVisible = false

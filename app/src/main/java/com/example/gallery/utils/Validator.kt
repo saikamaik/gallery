@@ -1,7 +1,6 @@
 package com.example.gallery.utils
 
 import android.widget.EditText
-import com.example.gallery.R
 import com.google.android.material.textfield.TextInputLayout
 
 class Validator {
@@ -32,7 +31,6 @@ class Validator {
             setError(passwordEditText, null)
             true
         }
-
     }
 
     fun validateUserName(userNameEditText: EditText): Boolean {

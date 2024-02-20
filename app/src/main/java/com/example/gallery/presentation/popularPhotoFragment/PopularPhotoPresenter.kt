@@ -8,7 +8,6 @@ class PopularPhotoPresenter: MvpPresenter<PopularPhotoView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
         viewState.initRecyclerView()
     }
 
