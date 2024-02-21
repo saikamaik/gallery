@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.example.gallery.App
-import com.example.gallery.R
 import com.example.gallery.databinding.FragmentSignupBinding
 import com.example.gallery.db.entity.UserDto
+import com.example.gallery.presentation.signIn.SignInFragmentDirections
 import com.example.gallery.utils.DateUtils
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -41,11 +41,11 @@ class SignUpFragment : MvpAppCompatFragment(), SignUpView {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbarCancel.setOnClickListener {
-            findNavController().navigate(R.id.welcomeFragment)
+            findNavController().popBackStack()
         }
 
         binding.buttonSignIn.setOnClickListener {
-            findNavController().navigate(R.id.signInFragment)
+            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
         }
 
         binding.buttonSignUp.setOnClickListener {

@@ -31,5 +31,12 @@ class WelcomeFragment: Fragment() {
         binding.buttonSignUp.setOnClickListener {
             findNavController().navigate(R.id.signUpFragment)
         }
+
+//        val sceneRoot: ViewGroup = binding.sceneRoot
+//        val signInScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.fragment_signin, this.context)
+//        val signUpScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.fragment_signup, this.context)
+
+
+
     }
 }

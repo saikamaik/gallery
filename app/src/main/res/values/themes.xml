@@ -7,6 +7,7 @@
         <item name="colorSecondaryVariant">#CF497E</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:colorBackground">@color/white</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="Theme.Gallery" parent="Base.Theme.Gallery" />

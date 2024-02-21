@@ -7,12 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gallery.App
 import com.example.gallery.databinding.FragmentPopularBinding
+import com.example.gallery.db.entity.PhotoDto
+import com.example.gallery.presentation.homeFragment.HomeFragmentDirections
 import com.example.gallery.recyclerview.RecyclerViewAdapter
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
 
@@ -21,6 +26,10 @@ class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
 
     @InjectPresenter
     lateinit var presenter: PopularPhotoPresenter
+
+    @ProvidePresenter
+    fun providePresenter(): PopularPhotoPresenter = App.appComponent.providePopularPhotoPresenter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,11 +51,25 @@ class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerViewAdapter.setPhotosData(photoList)
+        checkForPhotos()
+        recyclerViewAdapter.setPhotosData(presenter.getPopularPhotos())
 
     }
 
+    private fun checkForPhotos() {
+        if (presenter.getPopularPhotos().isEmpty()) {
+            for (photo in photoList)
+                presenter.insertPhoto(
+                    PhotoDto(0, photo, "popular")
+                )
+        }
+    }
+
     override fun initRecyclerView() {
+
+        recyclerViewAdapter.onItemClick = {
+            navigateToPhotoInfo(it)
+        }
 
         val recyclerView: RecyclerView = binding.recyclerViewPopular
         val progressBar: ProgressBar = binding.progressbar
@@ -61,6 +84,14 @@ class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = recyclerViewAdapter
 
+    }
+
+    private fun navigateToPhotoInfo(photoDto: PhotoDto) {
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToPhotoInfoFragment(
+                photoDto.photoId
+            )
+        )
     }
 
 }

@@ -7,22 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.App
 import com.example.gallery.databinding.FragmentNewBinding
+import com.example.gallery.db.entity.PhotoDto
+import com.example.gallery.presentation.homeFragment.HomeFragmentDirections
 import com.example.gallery.recyclerview.RecyclerViewAdapter
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class NewPhotoFragment: MvpAppCompatFragment(), NewPhotoView {
+class NewPhotoFragment : MvpAppCompatFragment(), NewPhotoView {
 
     private lateinit var binding: FragmentNewBinding
     private var recyclerViewAdapter: RecyclerViewAdapter = RecyclerViewAdapter()
 
     @InjectPresenter
     lateinit var presenter: NewPhotoPresenter
+
+    @ProvidePresenter
+    fun providePresenter(): NewPhotoPresenter = App.appComponent.provideNewPhotoPresenter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,11 +54,25 @@ class NewPhotoFragment: MvpAppCompatFragment(), NewPhotoView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerViewAdapter.setPhotosData(photoList)
+        checkForPhotos()
+        recyclerViewAdapter.setPhotosData(presenter.getNewPhotos())
 
     }
 
+    private fun checkForPhotos() {
+        if (presenter.getNewPhotos().isEmpty()) {
+            for (photo in photoList)
+                presenter.insertPhoto(
+                    PhotoDto(0, photo, "new")
+                )
+        }
+    }
+
     override fun initRecyclerView() {
+
+        recyclerViewAdapter.onItemClick = {
+            navigateToPhotoInfo(it)
+        }
 
         val recyclerView: RecyclerView = binding.recyclerViewNew
         val progressBar: ProgressBar = binding.progressbar
@@ -67,6 +87,14 @@ class NewPhotoFragment: MvpAppCompatFragment(), NewPhotoView {
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = recyclerViewAdapter
 
+    }
+
+    private fun navigateToPhotoInfo(photoDto: PhotoDto) {
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToPhotoInfoFragment(
+                photoDto.photoId
+            )
+        )
     }
 
 }

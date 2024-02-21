@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.gallery.App
-import com.example.gallery.R
 import com.example.gallery.databinding.FragmentSigninBinding
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -40,7 +39,7 @@ class SignInFragment: MvpAppCompatFragment(), SignInView {
         }
 
         binding.buttonSignUp.setOnClickListener {
-            findNavController().navigate(R.id.signUpFragment)
+            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
         }
 
         binding.buttonSignIn.setOnClickListener {

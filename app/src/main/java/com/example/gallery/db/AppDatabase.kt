@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.gallery.db.entity.Converters
+import com.example.gallery.db.entity.PhotoDto
 import com.example.gallery.db.entity.UserDto
 
-@Database(entities = [UserDto::class], version = 3)
+@Database(entities = [UserDto::class, PhotoDto::class], version = 5)
 @TypeConverters(
     Converters::class
 )

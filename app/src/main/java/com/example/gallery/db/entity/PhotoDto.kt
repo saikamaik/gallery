@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class PhotoDto(
-    @PrimaryKey val url: String,
-    val tag: String
+    @PrimaryKey (autoGenerate = true) var photoId: Int,
+    var photoUrl: String,
+    var photoTag: String
 )

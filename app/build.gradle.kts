@@ -52,7 +52,7 @@ android {
 
 dependencies {
 
-    val room_version = "2.6.1"
+    val roomVersion = "2.6.1"
     val daggerVer = "2.50"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -81,9 +81,9 @@ dependencies {
     kapt ("com.google.dagger:dagger-compiler:$daggerVer")
 
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-common:2.6.1")
 
     implementation("io.coil-kt:coil:2.5.0")

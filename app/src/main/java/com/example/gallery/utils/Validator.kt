@@ -1,5 +1,6 @@
 package com.example.gallery.utils
 
+import android.util.Patterns
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -11,7 +12,11 @@ class Validator {
         return if (email.isEmpty()) {
             setError(emailEditText, "Поле не должно быть пустым")
             return false
-        } else {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            setError(emailEditText, "E-mail введен некорректно")
+            false
+        }
+        else {
             setError(emailEditText, null)
             true
         }

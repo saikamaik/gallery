@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.gallery.db.entity.PhotoDto
 import com.example.gallery.db.entity.UserDto
 
 @Dao
@@ -27,8 +28,12 @@ interface AppDao {
     @Query("SELECT * FROM userdto WHERE current_user = true")
     fun getCurrentUser(): UserDto
 
-//    fun getAllNewPhotos()
-//
-//    fun getAllPopularPhotos()
+    @Query("SELECT * FROM photodto WHERE photoTag = :tag ")
+    fun getAllTypedPhotos(tag: String): List<PhotoDto>
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertPhoto(photoDto: PhotoDto)
+
+    @Query("SELECT * FROM photodto where photoId = :id")
+    fun getOnePhoto(id: Int): PhotoDto
 }
