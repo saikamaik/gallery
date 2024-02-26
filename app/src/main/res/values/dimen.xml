@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <dimen name="placeholders_small_size">12sp</dimen>
+    <dimen name="regular_text_size_for_auth">17sp</dimen>
+    <dimen name="regular_text_size_for_main_app">15sp</dimen>
+    <dimen name="bigger_text_size">20sp</dimen>
+    <dimen name="button_size">18sp</dimen>
+    <dimen name="button_welcome_size">14sp</dimen>
+    <dimen name="header_welcome_size">25sp</dimen>
+    <dimen name="headers_auth_size">30sp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+
+    
+</resources>
