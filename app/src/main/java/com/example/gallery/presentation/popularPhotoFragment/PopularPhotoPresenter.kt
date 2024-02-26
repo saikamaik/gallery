@@ -24,5 +24,9 @@ class PopularPhotoPresenter @Inject constructor(
         return appDao.getAllTypedPhotos("popular")
     }
 
+    fun navigateToPhotoInfoFragment(item: PhotoDto) {
+        viewState.navigateToPhotoInfoFragment(item)
+    }
+
 
 }

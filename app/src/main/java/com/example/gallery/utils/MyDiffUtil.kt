@@ -30,7 +30,7 @@ class MyDiffUtil(
                 false
             }
 
-            oldList[oldItemPosition].photoTag != newList[newItemPosition].photoTag -> {
+            oldList[oldItemPosition].photoType != newList[newItemPosition].photoType -> {
                 false
             }
             else -> true

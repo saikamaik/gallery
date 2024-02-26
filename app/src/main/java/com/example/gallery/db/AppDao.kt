@@ -28,7 +28,7 @@ interface AppDao {
     @Query("SELECT * FROM userdto WHERE current_user = true")
     fun getCurrentUser(): UserDto
 
-    @Query("SELECT * FROM photodto WHERE photoTag = :tag ")
+    @Query("SELECT * FROM photodto WHERE photoType = :tag ")
     fun getAllTypedPhotos(tag: String): List<PhotoDto>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

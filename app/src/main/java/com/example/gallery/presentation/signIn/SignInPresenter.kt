@@ -1,32 +1,33 @@
 package com.example.gallery.presentation.signIn
 
+import android.content.Context
 import android.widget.EditText
+import com.example.gallery.R
 import com.example.gallery.db.AppDao
-import com.google.android.material.textfield.TextInputLayout
+import moxy.InjectViewState
 import moxy.MvpPresenter
 import javax.inject.Inject
 
+@InjectViewState
 class SignInPresenter @Inject constructor(
-    private var appDao: AppDao
+    private var appDao: AppDao,
+    var context: Context
 )
     : MvpPresenter<SignInView>() {
 
     fun signInUser(email: EditText, password: EditText) {
 
-        setError(email, null)
-        setError(password, null)
-
         if (appDao.isUserExist(email.text.toString())) {
+
             val user = appDao.getOneUser(email.text.toString())
             if (user.password == password.text.toString()) {
                 viewState.navigateToHomeFragment()
                 appDao.updateCurrentUserField(true, user.email)
             } else {
-                setError(password, "Пароль не верный")
+                password.error = context.getString(R.string.passwords_doesnt_match)
             }
-        }
-        else {
-            setError(email, "Пользователя с такой почтой не существует")
+        } else {
+            email.error = context.getString(R.string.user_doesnt_exist)
         }
     }
 
@@ -37,11 +38,11 @@ class SignInPresenter @Inject constructor(
         }
     }
 
-    private fun setError(data: EditText, error: String?) {
-        if (data.parent.parent is TextInputLayout) {
-            (data.parent.parent as TextInputLayout).error = error
-        }
+    fun navigateUp() {
+        viewState.navigateUp()
     }
 
-
+    fun navigateToSignUp() {
+        viewState.navigateToSignUpFragment()
+    }
 }

@@ -1,47 +1,74 @@
 package com.example.gallery.presentation.signUp
 
-import android.widget.EditText
-import android.widget.Toast
+import android.content.Context
+import com.example.gallery.R
 import com.example.gallery.db.AppDao
 import com.example.gallery.db.entity.UserDto
+import com.example.gallery.utils.DateUtils
 import com.example.gallery.utils.Validator
 import com.google.android.material.textfield.TextInputLayout
+import moxy.InjectViewState
 import moxy.MvpPresenter
 import javax.inject.Inject
 
+@InjectViewState
 class SignUpPresenter @Inject constructor(
-    var appDao: AppDao
+    var appDao: AppDao,
+    val context: Context
 ) : MvpPresenter<SignUpView>() {
 
     private var validate: Validator = Validator()
+    private val dateUtils = DateUtils()
 
-    fun registerUser(userDto: UserDto, emailEditText: EditText) {
+    private fun registerUser(userDto: UserDto, emailTextInputLayout: TextInputLayout) {
 
         if (appDao.isUserExist(userDto.email)) {
-            setError(emailEditText, "Пользователь с такой почтой уже существует")
+            emailTextInputLayout.error = context.getString(R.string.user_already_exist)
         } else {
             appDao.insertUser(userDto)
             viewState.navigateToHomeFragment()
         }
     }
 
-    fun validateUser(
-        confirmPasswordEditText: EditText,
-        passwordEditText: EditText,
-        emailEditText: EditText,
-        usernameEditText: EditText
+    private fun validateUser(
+        confirmPasswordTextInputLayout: TextInputLayout,
+        passwordTextInputLayout: TextInputLayout,
+        emailTextInputLayout: TextInputLayout,
+        usernameTextInputLayout: TextInputLayout,
+        birthdayTextInputLayout: TextInputLayout
     ): Boolean {
         return if (
-            validate.validateEmail(emailEditText) &&
-            validate.validatePassword(passwordEditText, confirmPasswordEditText) &&
-            validate.validateUserName(usernameEditText)
+            validate.validateEmail(emailTextInputLayout) &&
+            validate.validatePassword(passwordTextInputLayout, confirmPasswordTextInputLayout) &&
+            validate.validateUserName(usernameTextInputLayout) &&
+            validate.validateBirthday(birthdayTextInputLayout)
         ) return true
         else false
     }
 
-    private fun setError(data: EditText, error: String?) {
-        if (data.parent.parent is TextInputLayout) {
-            (data.parent.parent as TextInputLayout).error = error
+    fun signUpUser(
+        confirmPasswordTextInputLayout: TextInputLayout,
+        passwordTextInputLayout: TextInputLayout,
+        emailTextInputLayout: TextInputLayout,
+        usernameTextInputLayout: TextInputLayout,
+        birthdayTextInputLayout: TextInputLayout
+    ) {
+        if (validateUser(
+                confirmPasswordTextInputLayout,
+                passwordTextInputLayout,
+                emailTextInputLayout,
+                usernameTextInputLayout,
+                birthdayTextInputLayout
+            )
+        ) {
+            val userDto = UserDto(
+                emailTextInputLayout.editText?.text.toString(),
+                passwordTextInputLayout.editText.toString(),
+                usernameTextInputLayout.editText?.text.toString(),
+                dateUtils.convertFromStringToDate(birthdayTextInputLayout.editText?.text.toString()),
+                isCurrentUser = true
+            )
+            registerUser(userDto, emailTextInputLayout)
         }
     }
 
@@ -50,6 +77,14 @@ class SignUpPresenter @Inject constructor(
         for (user in userList) {
             appDao.updateCurrentUserField(false, user.email)
         }
+    }
+
+    fun navigateUp() {
+        viewState.navigateUp()
+    }
+
+    fun navigateToSignUp() {
+        viewState.navigateToSignInFragment()
     }
 
 }

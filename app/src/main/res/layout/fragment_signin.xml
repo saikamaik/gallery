@@ -8,26 +8,27 @@
         android:id="@+id/toolbar_cancel"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
         android:elevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#5F5F5F"
-            android:textSize="15sp"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/regular_text_size_for_auth"
             android:text="@string/cancel"/>
 
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:background="#C4C4C4"
+        android:id="@+id/view_gray_line"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:background="@color/gray"
         app:layout_constraintTop_toBottomOf="@id/toolbar_cancel"
-        android:id="@+id/view_gray_line" />
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_sign_in"
@@ -38,81 +39,96 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="100dp"
         android:text="@string/sign_in"
-        android:textSize="30sp"
+        android:textSize="@dimen/headers_auth_size"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:elevation="2dp"/>
+
     <View
-        android:layout_width="94dp"
+        android:id="@+id/view_guideline"
+        android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="#CF497E"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/pink"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_in"
+        app:layout_constraintEnd_toEndOf="@id/tv_sign_in"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_in"
-        android:id="@+id/view_guideline" />
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_begin="16dp"
+        android:orientation="vertical"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_end="16dp"
+        android:orientation="vertical"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_email"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:textSize="17sp"
-        app:errorIconDrawable="@drawable/triangle_danger"
-        app:boxStrokeErrorColor="#E80000"
-        app:errorEnabled="true"
-        app:cursorColor="#CF497E"
-        app:hintEnabled="false"
-        app:boxStrokeColor="@color/gray"
+        android:layout_marginTop="50dp"
+        android:textSize="@dimen/regular_text_size_for_auth"
+        style="@style/TextInputLayoutWithError"
+        app:layout_constraintEnd_toStartOf="@+id/margin_end"
+        app:layout_constraintStart_toStartOf="@+id/margin_start"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_in">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:windowSoftInputMode="adjustResize"
+            android:layout_height="wrap_content"
             android:drawableEnd="@drawable/mail"
-            android:textColorHint="@color/gray"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            />
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:textColorHint="@color/gray"
+            android:windowSoftInputMode="adjustResize"
+            app:boxStrokeColor="@color/light_gray" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_password"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="5dp"
-        android:textSize="17sp"
+        android:textSize="@dimen/regular_text_size_for_auth"
         app:hintEnabled="false"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/triangle_danger"
-        app:boxStrokeErrorColor="#E80000"
-        app:cursorColor="#CF497E"
+        app:boxStrokeErrorColor="@color/red"
+        app:cursorColor="@color/pink"
         android:textColorHint="@color/gray"
         app:boxStrokeColor="@color/gray"
         app:passwordToggleDrawable="@drawable/eye"
         app:passwordToggleEnabled="true"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toTopOf="@id/button_sign_in"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintEnd_toEndOf="@id/margin_end"
         app:layout_constraintTop_toBottomOf="@id/tl_email">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="@string/password"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp"/>
+            android:paddingEnd="10dp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -120,17 +136,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tl_password"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/margin_end"
         android:text="@string/forgot_login_or_password"
-        android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:textColor="#C4C4C4"
-        android:focusable="true" />
+        android:textColor="@color/gray"
+        android:focusable="true"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_sign_in"
         android:layout_width="120dp"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:background="@drawable/rounded_corners_black"
         android:text="@string/sign_in"
@@ -148,6 +164,7 @@
         android:text="@string/sign_up"
         android:gravity="center"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="240dp"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textColor="@color/black"

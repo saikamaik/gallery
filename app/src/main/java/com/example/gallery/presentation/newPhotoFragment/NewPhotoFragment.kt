@@ -22,7 +22,12 @@ import moxy.presenter.ProvidePresenter
 class NewPhotoFragment : MvpAppCompatFragment(), NewPhotoView {
 
     private lateinit var binding: FragmentNewBinding
-    private var recyclerViewAdapter: RecyclerViewAdapter = RecyclerViewAdapter()
+    private var photos: List<PhotoDto> = arrayListOf()
+    private var recyclerViewAdapter: RecyclerViewAdapter =
+        RecyclerViewAdapter(photos, object : RecyclerViewAdapter.Callback {
+            override fun onItemClicked(item: PhotoDto) {
+                presenter.navigateToPhotoInfoFragment(item)
+            }})
 
     @InjectPresenter
     lateinit var presenter: NewPhotoPresenter
@@ -55,7 +60,7 @@ class NewPhotoFragment : MvpAppCompatFragment(), NewPhotoView {
         super.onViewCreated(view, savedInstanceState)
 
         checkForPhotos()
-        recyclerViewAdapter.setPhotosData(presenter.getNewPhotos())
+        recyclerViewAdapter.setData(presenter.getNewPhotos())
 
     }
 
@@ -63,16 +68,17 @@ class NewPhotoFragment : MvpAppCompatFragment(), NewPhotoView {
         if (presenter.getNewPhotos().isEmpty()) {
             for (photo in photoList)
                 presenter.insertPhoto(
-                    PhotoDto(0, photo, "new")
+                    PhotoDto(0,
+                        "photoName",
+                        "Description",
+                        null,
+                        1, photo,
+                        "new")
                 )
         }
     }
 
     override fun initRecyclerView() {
-
-        recyclerViewAdapter.onItemClick = {
-            navigateToPhotoInfo(it)
-        }
 
         val recyclerView: RecyclerView = binding.recyclerViewNew
         val progressBar: ProgressBar = binding.progressbar
@@ -89,12 +95,11 @@ class NewPhotoFragment : MvpAppCompatFragment(), NewPhotoView {
 
     }
 
-    private fun navigateToPhotoInfo(photoDto: PhotoDto) {
+    override fun navigateToPhotoInfoFragment(item: PhotoDto) {
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToPhotoInfoFragment(
-                photoDto.photoId
+                item.photoId
             )
         )
     }
-
 }

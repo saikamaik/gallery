@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.gallery.App
 import com.example.gallery.databinding.FragmentSigninBinding
@@ -34,12 +33,17 @@ class SignInFragment: MvpAppCompatFragment(), SignInView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpListeners()
+
+    }
+
+    private fun setUpListeners() {
         binding.toolbarCancel.setOnClickListener {
-            findNavController().popBackStack()
+            presenter.navigateUp()
         }
 
         binding.buttonSignUp.setOnClickListener {
-            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
+            presenter.navigateToSignUp()
         }
 
         binding.buttonSignIn.setOnClickListener {
@@ -55,8 +59,12 @@ class SignInFragment: MvpAppCompatFragment(), SignInView {
         findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
     }
 
-    override fun showToast(id: Int) {
-        Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
+    override fun navigateUp() {
+        findNavController().popBackStack()
+    }
+
+    override fun navigateToSignUpFragment() {
+        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
     }
 
 }

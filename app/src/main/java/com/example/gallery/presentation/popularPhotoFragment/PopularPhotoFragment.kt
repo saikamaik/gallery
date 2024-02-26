@@ -22,7 +22,12 @@ import moxy.presenter.ProvidePresenter
 class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
 
     private lateinit var binding: FragmentPopularBinding
-    private var recyclerViewAdapter: RecyclerViewAdapter = RecyclerViewAdapter()
+    private var photos: List<PhotoDto> = arrayListOf()
+    private var recyclerViewAdapter: RecyclerViewAdapter =
+        RecyclerViewAdapter(photos, object : RecyclerViewAdapter.Callback {
+            override fun onItemClicked(item: PhotoDto) {
+                presenter.navigateToPhotoInfoFragment(item)
+            }})
 
     @InjectPresenter
     lateinit var presenter: PopularPhotoPresenter
@@ -30,11 +35,8 @@ class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
     @ProvidePresenter
     fun providePresenter(): PopularPhotoPresenter = App.appComponent.providePopularPhotoPresenter()
 
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentPopularBinding.inflate(layoutInflater)
         return binding.root
@@ -52,24 +54,22 @@ class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
         super.onViewCreated(view, savedInstanceState)
 
         checkForPhotos()
-        recyclerViewAdapter.setPhotosData(presenter.getPopularPhotos())
+        recyclerViewAdapter.setData(presenter.getPopularPhotos())
 
     }
 
     private fun checkForPhotos() {
         if (presenter.getPopularPhotos().isEmpty()) {
-            for (photo in photoList)
-                presenter.insertPhoto(
-                    PhotoDto(0, photo, "popular")
+            for (photo in photoList) presenter.insertPhoto(
+                PhotoDto(
+                    0, "photoName", "Description", null, 1, photo, "popular"
                 )
+            )
         }
     }
 
-    override fun initRecyclerView() {
 
-        recyclerViewAdapter.onItemClick = {
-            navigateToPhotoInfo(it)
-        }
+    override fun initRecyclerView() {
 
         val recyclerView: RecyclerView = binding.recyclerViewPopular
         val progressBar: ProgressBar = binding.progressbar
@@ -86,10 +86,10 @@ class PopularPhotoFragment : MvpAppCompatFragment(), PopularPhotoView {
 
     }
 
-    private fun navigateToPhotoInfo(photoDto: PhotoDto) {
+    override fun navigateToPhotoInfoFragment(item: PhotoDto) {
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToPhotoInfoFragment(
-                photoDto.photoId
+                item.photoId
             )
         )
     }

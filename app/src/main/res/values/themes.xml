@@ -1,5 +1,7 @@
 <resources >
     <style name="Base.Theme.Gallery" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- Base colors -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -7,8 +9,18 @@
         <item name="colorSecondaryVariant">#CF497E</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColorHint">@color/gray</item>
+
+        <!-- Text atr -->
         <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/regular_text_size_for_auth</item>
+
     </style>
 
     <style name="Theme.Gallery" parent="Base.Theme.Gallery" />
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
 </resources>

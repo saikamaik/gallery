@@ -1,118 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="@string/search"
+        app:queryBackground="@null"
         android:background="@drawable/edittext_corners"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="@string/search"
         app:iconifiedByDefault="false"
-        />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/homePlaceholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/no_internet_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/webant_logo_transparent"/>
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/home_placeholder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="no_internet_image,tv_sorry,tv_nointernet" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_sorry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sorry"
-            android:textSize="17sp"
-            android:textColor="#C4C4C4"
-            app:layout_constraintTop_toBottomOf="@id/no_internet_image"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_nointernet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_sorry"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:textSize="12sp"
-            android:textColor="#C4C4C4"
-            android:text="@string/there_is_no_pictures_n_pleace_come_back_later"
-            android:gravity="center"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/loading_placeholder"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/no_internet_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/webant_logo_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sorry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sorry"
+        android:textColor="@color/gray"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_internet_image" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_nointernet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/there_is_no_pictures_n_pleace_come_back_later"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/placeholders_small_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sorry" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/loading_placeholder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="progressBar, tv_loading"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:indeterminate="false"
         android:layout_gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminate="false"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/loading"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:tabSelectedTextColor="@color/black"
-        app:tabIndicatorColor="#CF497E"
-        app:tabIndicatorFullWidth="true"
-        android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="5dp"
-        app:tabTextColor="@color/black"
+        android:layout_marginRight="16dp"
         android:background="@color/white"
+        app:tabIndicatorColor="@color/pink"
+        app:tabIndicatorFullWidth="true"
         app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black"
         android:contentDescription="@string/new_and_popular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar"
-        tools:ignore="MissingConstraints">
-    </com.google.android.material.tabs.TabLayout>
+        />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tabs_viewpager"
@@ -121,6 +111,5 @@
         android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tab_layout" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

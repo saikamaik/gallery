@@ -36,7 +36,5 @@ class WelcomeFragment: Fragment() {
 //        val signInScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.fragment_signin, this.context)
 //        val signUpScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.fragment_signup, this.context)
 
-
-
     }
 }

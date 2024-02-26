@@ -44,7 +44,7 @@ class PhotoInfoFragment: MvpAppCompatFragment(), PhotoInfoView {
     private fun initView(id: Int) {
         val photo = presenter.getOnePhoto(id)
         binding.ivInfo.load(photo.photoUrl)
-        binding.tvPhotoName.text = photo.photoTag
+        binding.tvPhotoName.text = photo.photoType
 
         binding.toolbarCancel.setOnClickListener {
             findNavController().popBackStack()

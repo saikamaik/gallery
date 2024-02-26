@@ -31,10 +31,7 @@ class HomeFragment: MvpAppCompatFragment(), HomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initTabsPager()
-        binding.homePlaceholder.isVisible = false
-        binding.progressBar.isVisible = false
         binding.loadingPlaceholder.isVisible = false
 
     }

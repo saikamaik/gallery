@@ -36,14 +36,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        dataBinding = true
         viewBinding = true
-    }
-    dataBinding{
-        enable = true
-    }
-    viewBinding{
-        enable = true
     }
     kapt {
         correctErrorTypes = true
@@ -60,32 +53,37 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
+    // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
 
+    // Moxy
     implementation ("com.github.moxy-community:moxy-android:2.2.2")
     implementation ("com.github.moxy-community:moxy:2.2.2")
     implementation ("com.github.moxy-community:moxy-ktx:2.2.2")
     kapt ("com.github.moxy-community:moxy-compiler:2.2.2")
     implementation ("com.github.moxy-community:moxy-app-compat:2.2.2")
 
+    // Dagger
     implementation ("com.google.dagger:dagger:$daggerVer")
     implementation ("com.google.dagger:dagger-android-support:$daggerVer")
     kapt ("com.google.dagger:dagger-android-processor:$daggerVer")
     kapt ("com.google.dagger:dagger-compiler:$daggerVer")
 
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Room
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-common:2.6.1")
 
+    // Coil для загрузки картинок
     implementation("io.coil-kt:coil:2.5.0")
 
 }

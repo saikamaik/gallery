@@ -24,4 +24,8 @@ class NewPhotoPresenter @Inject constructor(
         return appDao.getAllTypedPhotos("new")
     }
 
+    fun navigateToPhotoInfoFragment(item: PhotoDto) {
+        viewState.navigateToPhotoInfoFragment(item)
+    }
+
 }

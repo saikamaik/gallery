@@ -9,4 +9,10 @@ interface SignUpView: MvpView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun navigateToHomeFragment()
 
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun navigateUp()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun navigateToSignInFragment()
+
 }

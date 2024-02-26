@@ -1,58 +1,63 @@
 package com.example.gallery.utils
 
 import android.util.Patterns
-import android.widget.EditText
 import com.google.android.material.textfield.TextInputLayout
 
 class Validator {
 
-    fun validateEmail(emailEditText: EditText): Boolean {
-        val email: String = emailEditText.toString()
+    fun validateEmail(emailTextInputLayout: TextInputLayout): Boolean {
+        val email: String = emailTextInputLayout.editText?.text.toString()
 
         return if (email.isEmpty()) {
-            setError(emailEditText, "Поле не должно быть пустым")
+            emailTextInputLayout.error = "Поле не должно быть пустым"
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            setError(emailEditText, "E-mail введен некорректно")
+            emailTextInputLayout.error = "E-mail введен некорректно"
             false
         }
         else {
-            setError(emailEditText, null)
+            emailTextInputLayout.error = null
             true
         }
     }
 
-    fun validatePassword(passwordEditText: EditText, confirmPasswordEditText: EditText): Boolean {
-        val password: String = passwordEditText.text.toString()
-        val confirmPassword: String = confirmPasswordEditText.text.toString()
+    fun validatePassword(passwordTextInputLayout: TextInputLayout, confirmPasswordTextInputLayout: TextInputLayout): Boolean {
+        val password: String = passwordTextInputLayout.editText?.text.toString()
+        val confirmPassword: String = confirmPasswordTextInputLayout.editText?.text.toString()
 
         return if (password != confirmPassword) {
-            setError(passwordEditText, "Пароли не совпадают")
+            passwordTextInputLayout.error = "Пароли не совпадают"
             false
         } else if (password.isEmpty()) {
-            setError(passwordEditText, "Поле не должно быть пустым")
+            passwordTextInputLayout.error = "Поле не должно быть пустым"
             false
         } else {
-            setError(passwordEditText, null)
+            passwordTextInputLayout.error = null
             true
         }
     }
 
-    fun validateUserName(userNameEditText: EditText): Boolean {
-        val userName: String = userNameEditText.toString()
+    fun validateUserName(userNameTextInputLayout: TextInputLayout): Boolean {
+        val userName: String = userNameTextInputLayout.editText?.text.toString()
 
         return if (userName.isEmpty()) {
-            setError(userNameEditText, "Поле не должно быть пустым")
+            userNameTextInputLayout.error = "Поле не должно быть пустым"
             return false
         } else {
-            setError(userNameEditText, null)
+            userNameTextInputLayout.error = null
             true
         }
     }
 
-    private fun setError(data: EditText, error: String?) {
-        if (data.parent.parent is TextInputLayout) {
-            (data.parent.parent as TextInputLayout).error = error
+    fun validateBirthday(birthdayTextInputLayout: TextInputLayout): Boolean {
+        val birthday: String = birthdayTextInputLayout.editText?.text.toString()
+
+        return if (birthday.isEmpty()) {
+            birthdayTextInputLayout.error = "Поле не должно быть пустым"
+            return false
+        } else {
+            birthdayTextInputLayout.error = null
+            true
         }
     }
 

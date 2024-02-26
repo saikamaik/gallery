@@ -22,13 +22,11 @@
         android:label="SignInFragment"
         tools:layout="@layout/fragment_signin">
         <action
-            android:id="@+id/action_signInFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-        <action
             android:id="@+id/action_signInFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:popUpTo="@id/nav_graph" />
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
@@ -41,13 +39,11 @@
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_signup">
         <action
-            android:id="@+id/action_signUpFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-        <action
             android:id="@+id/action_signUpFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:popUpTo="@id/nav_graph" />
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment"
@@ -59,35 +55,18 @@
         android:name="com.example.gallery.presentation.homeFragment.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_newPhotoFragment"
-            app:destination="@id/newPhotoFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_popularPhotoFragment"
-            app:destination="@id/popularPhotoFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_photoInfoFragment"
-            app:destination="@id/photoInfoFragment" />
+            app:destination="@id/photoInfoFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/newPhotoFragment"
         android:name="com.example.gallery.presentation.newPhotoFragment.NewPhotoFragment"
-        android:label="NewPhotoFragment" >
-        <action
-            android:id="@+id/action_newPhotoFragment_to_photoInfoFragment"
-            app:destination="@id/photoInfoFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
+        android:label="NewPhotoFragment" />
     <fragment
         android:id="@+id/popularPhotoFragment"
         android:name="com.example.gallery.presentation.popularPhotoFragment.PopularPhotoFragment"
-        android:label="PopularPhotoFragment" >
-        <action
-            android:id="@+id/action_popularPhotoFragment_to_photoInfoFragment"
-            app:destination="@id/photoInfoFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
+        android:label="PopularPhotoFragment" />
     <fragment
         android:id="@+id/photoInfoFragment"
         android:name="com.example.gallery.presentation.photoInfoFragment.PhotoInfoFragment"

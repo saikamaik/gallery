@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextInputLayoutWithError">
+        <item name="hintEnabled">false</item>
+        <item name="errorEnabled">true</item>
+        <item name="errorIconDrawable">@drawable/triangle_danger</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+        <item name="boxStrokeColor">@color/gray</item>
+        <item name="cursorColor">@color/pink</item>
+    </style>
+
+    <style name="TextInputLayoutWithoutError">
+        <item name="hintEnabled">false</item>
+        <item name="errorEnabled">true</item>
+        <item name="boxStrokeColor">@color/gray</item>
+        <item name="cursorColor">@color/pink</item>
+    </style>
+
+    <style name="EditTextPadding">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+    </style>
+
+
+    
+</resources>

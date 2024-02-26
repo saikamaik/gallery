@@ -2,8 +2,11 @@ package com.example.gallery.di
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
 import com.example.gallery.db.AppDao
 import com.example.gallery.db.AppDatabase
+import com.example.gallery.db.DatabaseRepository
+import com.example.gallery.db.DatabaseRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,8 +24,15 @@ class AppModule(
 
     @Singleton
     @Provides
-    fun getRoomDBInstance() : AppDatabase {
-        return AppDatabase.getDatabase(provideAppContext())
+    fun getRoomDBInstance(
+        context: Context
+    ) = Room.databaseBuilder(context, AppDatabase::class.java, "user_db")
+        .fallbackToDestructiveMigration().allowMainThreadQueries().build()
+
+    @Singleton
+    @Provides
+    fun getDBRepository(): DatabaseRepository {
+        return DatabaseRepositoryImpl(getAppDao(getRoomDBInstance(provideAppContext())))
     }
 
     @Singleton

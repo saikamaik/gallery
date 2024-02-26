@@ -9,9 +9,6 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.example.gallery.App
 import com.example.gallery.databinding.FragmentSignupBinding
-import com.example.gallery.db.entity.UserDto
-import com.example.gallery.presentation.signIn.SignInFragmentDirections
-import com.example.gallery.utils.DateUtils
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -25,7 +22,6 @@ class SignUpFragment : MvpAppCompatFragment(), SignUpView {
     fun providePresenter(): SignUpPresenter = App.appComponent.provideSignUpPresenter()
 
     private lateinit var binding: FragmentSignupBinding
-    private val dateUtils = DateUtils()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -40,41 +36,41 @@ class SignUpFragment : MvpAppCompatFragment(), SignUpView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbarCancel.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding.buttonSignIn.setOnClickListener {
-            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
-        }
-
-        binding.buttonSignUp.setOnClickListener {
-            signUpUser()
-        }
+        setUpListeners()
 
     }
 
-    private fun signUpUser() {
-        if (presenter.validateUser(
-                binding.etConfirmPassword,
-                binding.etPassword,
-                binding.etEmail,
-                binding.etUsername
+    private fun setUpListeners() {
+
+        binding.toolbarCancel.setOnClickListener {
+            presenter.navigateUp()
+        }
+
+        binding.buttonSignIn.setOnClickListener {
+            presenter.navigateToSignUp()
+        }
+
+        binding.buttonSignUp.setOnClickListener {
+            presenter.signUpUser(
+                binding.tlConfirmPassword,
+                binding.tlPassword,
+                binding.tlEmail,
+                binding.tlUsername,
+                binding.tlBirthday
             )
-        ) {
-            val userDto = UserDto(
-                binding.etEmail.text.toString(),
-                binding.etPassword.text.toString(),
-                binding.etUsername.text.toString(),
-                dateUtils.convertFromStringToDate(binding.etBirthday.text.toString()),
-                isCurrentUser = true
-            )
-            presenter.registerUser(userDto, binding.etEmail)
         }
     }
 
     override fun navigateToHomeFragment() {
         presenter.resetCurrentUser()
         findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToHomeFragment())
+    }
+
+    override fun navigateUp() {
+        findNavController().popBackStack()
+    }
+
+    override fun navigateToSignInFragment() {
+        findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
     }
 }
