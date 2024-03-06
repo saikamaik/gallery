@@ -16,6 +16,20 @@ class NewPhotoPresenter @Inject constructor(
         viewState.initRecyclerView()
     }
 
+    fun checkForPhotos(photoList: List<String>) {
+        if (getNewPhotos().isEmpty()) {
+            for (photo in photoList)
+                insertPhoto(
+                    PhotoDto(0,
+                        "photoName",
+                        "Description",
+                        null,
+                        1, photo,
+                        "new")
+                )
+        }
+    }
+
     fun insertPhoto(photo: PhotoDto) {
             appDao.insertPhoto(photo)
     }

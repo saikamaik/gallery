@@ -9,8 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="1dp"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/view_guideline">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_toolbar"
@@ -27,18 +29,21 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_cancel"
-        />
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toTopOf="@id/tv_sign_in"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_cancel" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintTop_toBottomOf="@id/toolbar_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toTopOf="@id/view_guideline"
         android:text="@string/sign_in"
+        app:layout_constraintVertical_chainStyle="packed"
         style="@style/Header"
         />
 
@@ -47,36 +52,25 @@
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="@color/pink"
-        app:layout_constraintStart_toStartOf="@id/tv_sign_in"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/tl_email"
         app:layout_constraintEnd_toEndOf="@id/tv_sign_in"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_in"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_in"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/margin_start"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_begin="16dp"
-        android:orientation="vertical"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/margin_end"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_end="16dp"
-        android:orientation="vertical"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="6dp"
         style="@style/TextInputLayoutWithError"
-        app:layout_constraintEnd_toStartOf="@+id/margin_end"
-        app:layout_constraintStart_toStartOf="@+id/margin_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_sign_in">
+        app:layout_constraintBottom_toTopOf="@id/tl_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_guideline">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
@@ -92,78 +86,72 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_password"
+        style="@style/TextInputLayoutWithError"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:hintEnabled="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:errorEnabled="true"
-        style="@style/TextInputLayoutWithError"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/tv_forgot_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tl_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:passwordToggleDrawable="@drawable/eye"
-        app:passwordToggleEnabled="true"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toTopOf="@id/button_sign_in"
-        app:layout_constraintStart_toStartOf="@id/margin_start"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
-        app:layout_constraintTop_toBottomOf="@id/tl_email">
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
+            style="@style/TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:hint="@string/password"
-            style="@style/TextInputEditText"
-            />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tl_password"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
-        android:text="@string/forgot_login_or_password"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:textColor="@color/gray"
         android:focusable="true"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_margin_start"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_begin="127dp"
-        android:orientation="vertical"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_margin_end"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_end="127dp"
-        android:orientation="vertical"
-        />
+        android:text="@string/forgot_login_or_password"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/button_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tl_password" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_sign_in"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:background="@drawable/rounded_corners_black"
         android:text="@string/sign_in"
         style="@style/ButtonPrimary"
-        app:layout_constraintStart_toStartOf="@id/button_margin_start"
-        app:layout_constraintEnd_toEndOf="@id/button_margin_end"
-        app:layout_constraintTop_toBottomOf="@id/tl_password"/>
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@id/button_sign_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_sign_up"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
-        android:layout_marginBottom="240dp"
         style="@style/ButtonSecondary"
-        app:layout_constraintStart_toStartOf="@id/button_margin_start"
-        app:layout_constraintEnd_toEndOf="@id/button_margin_end"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_sign_in"/>
 
 

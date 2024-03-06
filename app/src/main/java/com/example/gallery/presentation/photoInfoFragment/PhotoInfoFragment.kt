@@ -41,7 +41,7 @@ class PhotoInfoFragment: MvpAppCompatFragment(), PhotoInfoView {
 
     }
 
-    private fun initView(id: Int) {
+    override fun initView(id: Int) {
         val photo = presenter.getOnePhoto(id)
         binding.ivInfo.load(photo.photoUrl)
         binding.tvPhotoName.text = photo.photoType

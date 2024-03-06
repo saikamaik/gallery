@@ -9,76 +9,69 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="1dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_sign_up"
-        app:layout_constraintTop_toBottomOf="@id/view_border">
+        app:layout_constraintBottom_toTopOf="@id/view_line">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
-            android:textSize="15sp"
+            android:textSize="@dimen/regular_text_size_for_auth"
             android:text="@string/cancel"/>
 
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@id/view_border"
-        android:background="@color/gray"
+        android:id="@+id/view_border"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_cancel"/>
+        android:background="@color/gray"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_cancel"
+        app:layout_constraintBottom_toTopOf="@id/tv_sign_up"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/toolbar_cancel"
+        app:layout_constraintBottom_toTopOf="@id/view_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/view_border"
-        android:layout_marginTop="100dp"
         android:text="@string/sign_up"
         style="@style/Header"
         />
 
     <View
-        android:id="@+id/view_border"
+        android:id="@+id/view_line"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="@color/pink"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintBottom_toTopOf="@id/tl_username"
         app:layout_constraintStart_toStartOf="@id/tv_sign_up"
         app:layout_constraintEnd_toEndOf="@id/tv_sign_up"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_up"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/margin_start"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_begin="16dp"
-        android:orientation="vertical"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/margin_end"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_end="16dp"
-        android:orientation="vertical"
-        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         style="@style/TextInputLayoutWithError"
         app:cursorColor="@color/pink"
-        app:layout_constraintStart_toStartOf="@id/margin_start"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
-        app:layout_constraintTop_toBottomOf="@id/tv_sign_up"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_line"
         app:layout_constraintBottom_toTopOf="@id/tl_birthday">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -97,10 +90,11 @@
         android:id="@+id/tl_birthday"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         style="@style/TextInputLayoutWithoutError"
-        app:layout_constraintStart_toStartOf="@id/margin_start"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tl_username"
         app:layout_constraintBottom_toTopOf="@id/tl_email"
         >
@@ -123,12 +117,11 @@
         android:id="@+id/tl_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        style="@style/TextInputLayoutWithError"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        style="@style/TextInputLayoutWithError"
-        app:layout_constraintStart_toStartOf="@id/margin_start"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tl_birthday"
         app:layout_constraintBottom_toTopOf="@id/tl_password">
 
@@ -149,12 +142,13 @@
         android:id="@+id/tl_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         app:passwordToggleEnabled="true"
         app:passwordToggleDrawable="@drawable/eye"
         style="@style/TextInputLayoutWithError"
-        app:layout_constraintStart_toStartOf="@id/margin_start"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tl_email"
         app:layout_constraintBottom_toTopOf="@id/tl_confirm_password">
 
@@ -172,12 +166,13 @@
         android:id="@+id/tl_confirm_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         app:passwordToggleDrawable="@drawable/eye"
         style="@style/TextInputLayoutWithError"
         app:passwordToggleEnabled="true"
-        app:layout_constraintStart_toStartOf="@id/margin_start"
-        app:layout_constraintEnd_toEndOf="@id/margin_end"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tl_password"
         app:layout_constraintBottom_toTopOf="@id/button_sign_up">
 
@@ -192,43 +187,34 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_margin_start"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_begin="127dp"
-        android:orientation="vertical"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/button_margin_end"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintGuide_end="127dp"
-        android:orientation="vertical"
-        />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_sign_up"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:background="@drawable/rounded_corners_black"
         style="@style/ButtonPrimary"
         android:text="@string/sign_up"
-        app:layout_constraintStart_toStartOf="@id/button_margin_start"
-        app:layout_constraintEnd_toEndOf="@id/button_margin_end"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tl_confirm_password"
         app:layout_constraintBottom_toTopOf="@id/button_sign_in"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_sign_in"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text="@string/sign_in"
         style="@style/ButtonSecondary"
-        app:layout_constraintStart_toStartOf="@id/button_margin_start"
-        app:layout_constraintEnd_toEndOf="@id/button_margin_end"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_sign_up"
         />
 

@@ -9,7 +9,7 @@
             android:id="@+id/recyclerViewPopular"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingStart="17dp"
+            android:paddingStart="8dp"
             android:paddingBottom="65dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

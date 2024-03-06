@@ -17,7 +17,7 @@ class SignUpPresenter @Inject constructor(
     val context: Context
 ) : MvpPresenter<SignUpView>() {
 
-    private var validate: Validator = Validator()
+    private var validate: Validator = Validator(context)
     private val dateUtils = DateUtils()
 
     private fun registerUser(userDto: UserDto, emailTextInputLayout: TextInputLayout) {

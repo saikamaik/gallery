@@ -1,18 +1,20 @@
 package com.example.gallery.utils
 
+import android.content.Context
 import android.util.Patterns
+import com.example.gallery.R
 import com.google.android.material.textfield.TextInputLayout
 
-class Validator {
+class Validator(var context: Context) {
 
     fun validateEmail(emailTextInputLayout: TextInputLayout): Boolean {
         val email: String = emailTextInputLayout.editText?.text.toString()
 
         return if (email.isEmpty()) {
-            emailTextInputLayout.error = "Поле не должно быть пустым"
+            emailTextInputLayout.error = context.getString(R.string.editText_cant_be_empty)
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailTextInputLayout.error = "E-mail введен некорректно"
+            emailTextInputLayout.error = context.getString(R.string.email_is_wrong)
             false
         }
         else {
@@ -26,10 +28,10 @@ class Validator {
         val confirmPassword: String = confirmPasswordTextInputLayout.editText?.text.toString()
 
         return if (password != confirmPassword) {
-            passwordTextInputLayout.error = "Пароли не совпадают"
+            passwordTextInputLayout.error = context.getString(R.string.passwords_doesnt_match)
             false
         } else if (password.isEmpty()) {
-            passwordTextInputLayout.error = "Поле не должно быть пустым"
+            passwordTextInputLayout.error = context.getString(R.string.editText_cant_be_empty)
             false
         } else {
             passwordTextInputLayout.error = null
@@ -41,7 +43,7 @@ class Validator {
         val userName: String = userNameTextInputLayout.editText?.text.toString()
 
         return if (userName.isEmpty()) {
-            userNameTextInputLayout.error = "Поле не должно быть пустым"
+            userNameTextInputLayout.error = context.getString(R.string.editText_cant_be_empty)
             return false
         } else {
             userNameTextInputLayout.error = null
@@ -53,7 +55,7 @@ class Validator {
         val birthday: String = birthdayTextInputLayout.editText?.text.toString()
 
         return if (birthday.isEmpty()) {
-            birthdayTextInputLayout.error = "Поле не должно быть пустым"
+            birthdayTextInputLayout.error = context.getString(R.string.editText_cant_be_empty)
             return false
         } else {
             birthdayTextInputLayout.error = null

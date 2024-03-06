@@ -59,23 +59,9 @@ class NewPhotoFragment : MvpAppCompatFragment(), NewPhotoView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkForPhotos()
+        presenter.checkForPhotos(photoList)
         recyclerViewAdapter.setData(presenter.getNewPhotos())
 
-    }
-
-    private fun checkForPhotos() {
-        if (presenter.getNewPhotos().isEmpty()) {
-            for (photo in photoList)
-                presenter.insertPhoto(
-                    PhotoDto(0,
-                        "photoName",
-                        "Description",
-                        null,
-                        1, photo,
-                        "new")
-                )
-        }
     }
 
     override fun initRecyclerView() {
